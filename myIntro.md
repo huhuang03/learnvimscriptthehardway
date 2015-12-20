@@ -20,4 +20,4 @@
 
 可从[BitBucket](http://bitbucket.org/sjl/learnvimscriptthehardway/)和[GitHub](http://github.com/sjl/learnvimscriptthehardway/)获取本书的源码。如果你发下任何错误或感觉某处 可以改善，可以随意提交问题，但是我保留本书的版权，所以，如果你感觉不爽我也能够理解。
 
-原翻译作者为[https://github.com/isayme/learnvimscriptthehardway-cn](https://github.com/isayme/learnvimscriptthehardway-cn)，我只是将其搬到了gitbook。因为有一次原作者的个人网址无法打开，而那时候我还没有找到github的地址，还以为从此失去了一本好书。感谢作者的辛勤工作！
+原翻译作者为[https://github.com/isayme/learnvimscriptthehardway-cn](https://github.com/isayme/learnvimscriptthehardway-cn)，我只是将其搬到了gitbook。因为有一次原作者的个人网址无法打开，而那时候我还没有找到github的地址，还以为从此失去了一本好书，所以动了将此书搬到github的念头。感谢作者的辛勤工作！
