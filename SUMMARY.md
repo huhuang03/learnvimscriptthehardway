@@ -1,6 +1,6 @@
 # Summary
 
-* [前沿](chapters/i.markdown)
+* [前言](chapters/i.markdown)
 * [鸣谢](chapters/ii.markdown)
 * [预备知识](chapters/0.markdown)
 * [打印信息](chapters/1.markdown)
