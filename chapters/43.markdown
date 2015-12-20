@@ -1,0 +1,92 @@
+# 新希望：用Pathogen配置插件
+
+Vim的插件配置方式，在你仅仅添加一个文件来自定义自己的Vim体验时很合理， 但当你想要使用别人写的插件时，这种方式会导致一团糟。
+
+在过去，要想使用别人写好的插件，你得下载所有文件并逐一正确地放置它们。 你也可能使用`zip`或`tar`来替你做放置的工作。
+
+在这个过程中有些明显的问题：
+
+  * 当你想更新插件的时候怎么办？你可以覆盖旧的文件， 但如果作者删除了某个文件，你怎么知道你要手工删除对应文件？
+  * 假如有两个插件正好使用了同样的文件名(比如`utils.vim`或别的更大众的名字)呢？ 有时你可以简单地重命名掉它，但如果它位于`autoload/`或别的名字相关的文件夹中呢？ 你改掉文件名，就等于改掉插件。这一点也不好玩。
+
+人们总结出一系列hacks来让事情变得简单些，比如Vimball。 幸运的是，我们不再需要忍受这些肮脏的hacks。 [Tim Pope](http://t
+po.pe/)创造了著名的[Pathogen](http://www.vim.org/scripts/script.php?script_id=2332)插
+件让管理大量插件变得轻松愉快， 只要插件作者神志清醒地安排好插件结构。(译注：现在推荐[vundle](https://github.com/gmarik/
+vundle)来代替Pathogen，前者支持使用git下载插件)
+
+让我们了解一下Pathogen的工作方式，以及为了让我们的插件更加兼容，我们需要做的事。
+
+## 运行时路径
+
+当Vim在特殊的文件夹，比如`syntax/`，中查找文件时，它不仅仅只到单一的地方上查找。
+就像Linux/Unix/BSD系统上的`PATH`，Vim设置`runtimepath`以便查找要加载的文件。
+
+在你的桌面创建`colors`文件夹。在这个文件夹中创建一个叫`mycolor.vim`的文件(在本示例中你可以让它空着)。 打开Vim并执行这个命令：
+
+    
+    
+    :color mycolor
+
+Vim将显示一个错误，因为它不懂得去你的桌面查找。现在执行这个命令：
+
+    
+    
+    :set runtimepath=/Users/sjl/Desktop
+
+当然，你得根据你的情况修改路径名。现在再尝试color命令：
+
+    
+    
+    :color mycolor
+
+这次Vim找到了`mycolor.vim`，所以它将不再报错。由于文件是空的，它事实上什么都没_做_， 但由于它不再报错，我们确信它找到了。
+
+## Pathogen
+
+Pathogen插件在你加载Vim的时候自动地把路径加到你的`runtimepath`中。
+所有在`~/.vim/bundle/`下的文件夹将逐个加入到`runtimepath`。(译注：vundle也是这么做的)
+
+这意味着每个`bundle/`下的文件夹应该包括部分或全部的标准的Vim插件文件夹，比如`colors/`和`syntax/`。
+现在Vim可以从每个文件夹中加载文件，而且每个插件文件都独立于自己的文件夹中。
+
+这么一来更新插件就轻松多了。你只需要整个移除旧的插件文件夹，并迎来新的版本。 如果你通过版本控制来管理`~/.vim`文件夹(你应该这么做)，
+你可以使用Mercurial的subrepo或Git的submodule功能来直接签出(checkout)每个插件的代码库， 然后用一个简单的`hg
+pull; hg update`或`git pull origin master`来更新。
+
+## 成为Pathogen兼容的
+
+我们计划让我们的用户通过Pathogen安装我们写的Potion插件。 我们需要做的：在插件的代码库里，放置我们的文件到正确的文件夹中。就是这么简单！
+
+我们插件的代码库展开后看起来就像这样：
+
+    
+    
+    potion/
+        README
+        LICENSE
+        doc/
+            potion.txt
+        ftdetect/
+            potion.vim
+        ftplugin/
+            potion.vim
+        syntax/
+            potion.vim
+        ... etc ...
+
+我们把它放置在GitHub或Bitbucket上，这样用户就能简单地clone它到`bundle/`，一切顺利！
+
+## 练习
+
+如果你还没有安装[vnudle][]，安装它。(译注：原文是安装[Pathogen](http://www.vim.org/scripts/script.p
+hp?script_id=2332)，但是没有必要啦)
+
+给你的插件创建Mercurial或Git代码库，起名叫`potion`。
+你可以把它放到你喜欢的地方，并链接到`~/.vim/bundle/potion/`或就把它直接放到`~/.vim/bindle/potion/`。
+
+在代码库中创建`README`和`LICENSE`文件，然后commit。
+
+Push到Bitbucket或GitHub。
+
+阅读`:help runtimepath`。
+
