@@ -1,5 +1,7 @@
 # Summary
 
+* [i. 预备知识](chapters/i.markdown)
+* [ii. 预备知识](chapters/ii.markdown)
 * [0. 预备知识](chapters/0.markdown)
 * [1. 打印信息](chapters/1.markdown)
 * [2. 设置选项](chapters/2.markdown)
